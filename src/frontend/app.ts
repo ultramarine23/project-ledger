@@ -4,11 +4,10 @@ import { SchedulerAPI } from "../backend/scheduler-api.js";
 
 
 let jobs : JobCollection = new JobCollection();
-let optimalJobset : JobCollection = new JobCollection();
 const jobInputForm = document.getElementById("job-input-form") as HTMLFormElement;
 const optimizeRefreshButton = document.getElementById("optimized-jobs-refresh") as HTMLButtonElement;
 
-//jobInputForm.addEventListener("submit", receiveJobInputData);
+jobInputForm.addEventListener("submit", receiveJobInputData);
 optimizeRefreshButton.addEventListener("click", refreshOptimalJobset);
 
 function receiveJobInputData(event : SubmitEvent) {
@@ -50,14 +49,7 @@ function receiveJobInputData(event : SubmitEvent) {
 async function refreshOptimalJobset(event : MouseEvent) {
     event.preventDefault();
 
-    const testdata = new JobCollection(
-        [
-            new Job(0, 1, 3, 5),
-            new Job(1, 5, 7, 10)
-        ]
-    );
-
-    const result = await SchedulerAPI.optimizeSchedule(testdata);
+    const result = await SchedulerAPI.optimizeSchedule(jobs);
     const optimizedJobsTimeline = document.getElementById("optimized-jobs-timeline") as HTMLDivElement;
     optimizedJobsTimeline.textContent = result.getTotalProfit().toString();
 
@@ -71,5 +63,4 @@ function displayOptimalJobset(jobset : JobCollection) : void {
     tile.textContent = "ABCD"
 
     optimizedJobsTimeline.appendChild(tile);
-    
 }
