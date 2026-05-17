@@ -59,7 +59,7 @@ async function refreshOptimalJobset(event : MouseEvent) {
 
     const result = await SchedulerAPI.optimizeSchedule(testdata);
     const optimizedJobsTimeline = document.getElementById("optimized-jobs-timeline") as HTMLDivElement;
-    optimizedJobsTimeline.textContent = result.toString();
+    optimizedJobsTimeline.textContent = result.getTotalProfit().toString();
 
 }
 

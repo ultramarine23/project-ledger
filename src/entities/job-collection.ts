@@ -15,6 +15,14 @@ export default class JobCollection {
         this.jobs = this.jobs.filter(job => job.jobID !== targJob.jobID);
     }
 
+    getTotalProfit() : number {
+        let profit = 0;
+        this.jobs.forEach((job) => {
+            profit += job.profit;
+        })
+        return profit;
+    }
+
     toJSON() : object {
         return {
             jobs : this.jobs.map(job => job.toJSON()),

@@ -3,7 +3,7 @@ import sys
 from datetime import datetime
 
 class JobCollection:
-    def __init__(self, jobs : list[Job] = [], generation_time : datetime = ""):
+    def __init__(self, jobs : list[Job] = [], generation_time : datetime = datetime.now()):
         self.jobs = jobs
         self.generation_time = generation_time
     
@@ -25,7 +25,7 @@ class JobCollection:
     def to_jsondict(self):
         return {
             "generationTime" : self.generation_time.isoformat().replace("+00:00", "+Z"),
-            "jobs" : [j.to_dict() for j in self.jobs]
+            "jobs" : [j.to_jsondict() for j in self.jobs]
         }
 
     @staticmethod

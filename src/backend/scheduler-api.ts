@@ -18,7 +18,6 @@ export class SchedulerAPI {
             coll.toJSON()
         );
         
-        return pythonOutput["result"];
-        //return JobCollection.fromJSON(pythonOutput);
+        return JobCollection.fromJSON(pythonOutput);
     }
 }
