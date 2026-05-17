@@ -1,14 +1,30 @@
 import Job from "../entities/job.js"
 import JobCollection from "../entities/job-collection.js";
 import { SchedulerAPI } from "../backend/scheduler-api.js";
+import { Page } from "./types/page.js";
+import { getPage } from "./router/router.js";
 
+let currentPage: Page | null = null;
 
+export function loadPage(page: Page) {
+    const app : HTMLDivElement = document.getElementById("app") as HTMLDivElement;
+
+    currentPage?.cleanup?.();
+    app.innerHTML = page.html;
+    page.attachEvents();
+    currentPage = page;
+}
+
+loadPage(getPage("dashboard"));
+
+/*
 let jobs : JobCollection = new JobCollection();
 const jobInputForm = document.getElementById("job-input-form") as HTMLFormElement;
 const optimizeRefreshButton = document.getElementById("optimized-jobs-refresh") as HTMLButtonElement;
 
 jobInputForm.addEventListener("submit", receiveJobInputData);
 optimizeRefreshButton.addEventListener("click", refreshOptimalJobset);
+
 
 function receiveJobInputData(event : SubmitEvent) {
     event.preventDefault();
@@ -64,3 +80,4 @@ function displayOptimalJobset(jobset : JobCollection) : void {
 
     optimizedJobsTimeline.appendChild(tile);
 }
+*/

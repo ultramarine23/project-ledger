@@ -13,13 +13,23 @@
     margin: 0;
 }
 
-
-body {
+.window {
     display: flex;
-    flex-direction: column;
-    background-color: var(--color1);
+    flex-direction: row;
     gap: 1.5em;
-    margin: 1em;
+    background-color: var(--color4);
+}
+
+#sidebar {
+    width: 25%;
+    height: 100vh;
+    background-color: var(--color3);
+}
+
+#app {
+    width: 75%;
+    height: 100vh;
+    background-color: var(--color4);
 }
 
 .body-section {

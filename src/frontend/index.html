@@ -1,9 +1,32 @@
+<!--
+index.html is the only html file in the project, and is only responsible
+for the high-level arrangement of the sidebar and the app content
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/textstyles.css">
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="stylesheet" href="./styles/textstyles.css">
 </head>
+<body>
+    <div class="window">
+        <aside id="sidebar">
+            *sidebar here*
+        </aside>
+
+        <div id="app">
+            *app content here*
+        </div>
+    </div>
+
+    <script>
+        require("../../dist/frontend/app.js");
+    </script>
+</body>
+</html>
+
+<!--
 <body>
     <span class="header text-color6">Freelancer Scheduler</span>
 
@@ -41,7 +64,8 @@
     </div>
 
     <script>
-        require("../../../dist/frontend/app.js");
+        require("../../dist/frontend/app.js");
     </script>
 </body>
 </html>
+-->
