@@ -1,3 +1,14 @@
+/*
+app.ts is the "brain" TS file (the only script attached to index.html)
+
+app.ts has the loadPage function which fully loads a page from a Page 
+object; remember that the syntax for switching pages is:
+    loadPage(getPage("dashboard"));
+where loadPage is imported from app.ts and getPage is imported from router.ts
+
+if you wanna edit the actual pages, the pages folder is ur friend ;))
+*/
+
 import Job from "../entities/job.js"
 import JobCollection from "../entities/job-collection.js";
 import { SchedulerAPI } from "../backend/scheduler-api.js";
