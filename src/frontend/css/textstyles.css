@@ -1,0 +1,54 @@
+.emp {
+    font-weight: 600;
+}
+
+.text-color1 {
+    color: var(--color1);
+}
+
+.text-color2 {
+    color: var(--color2);
+}
+
+.text-color3 {
+    color: var(--color3);
+}
+
+.text-color4 {
+    color: var(--color4);
+}
+
+.text-color5 {
+    color: var(--color5);
+}
+
+.text-color6 {
+    color: var(--color6);
+}
+
+.paragraph {
+    display: block;
+    font-size: 14px;
+}
+
+.system {
+    display: block;
+    font-size: 14px;
+    opacity: 60%;
+}
+
+.large-paragraph {
+    display: block;
+    font-size: 16px;
+}
+
+.subheader {
+    display: block;
+    font-size: 24px;
+}
+
+.header {
+    display: block;
+    font-size: 32px;
+    font-weight: 600;
+}
