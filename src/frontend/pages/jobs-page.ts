@@ -1,50 +1,61 @@
+import { SchedulerAPI } from "../../backend/scheduler-api";
+import Job from "../../entities/job";
+import JobCollection from "../../entities/job-collection";
+import { loadPage } from "../app";
+import { appState } from "../app-state";
+import { AllJobsPanel } from "../components/all-jobs-panel";
+import { OptimizedJobsPanel } from "../components/optimized-jobs-panel";
+import { JobAdder } from "../components/job-adder";
+import { getPage } from "../router/router";
 import { Page } from "../types/page";
 
 export function JobsPage() : Page {
+    // instantiate block components
+    const allJobsPanel : AllJobsPanel = new AllJobsPanel(appState.allJobs);
+    const jobAdder : JobAdder = new JobAdder(() => {loadPage(getPage("jobs"))});
+    const optimizedJobsPanel : OptimizedJobsPanel = new OptimizedJobsPanel();
+
     let pageHTML : string = `
-    <span class="header text-color6">Freelancer Scheduler</span>
+    <div id="jobs-page">
+        <span class="header text-color6">Freelancer Scheduler</span>
 
-    <form class="body-section" id="job-input-form">
-        <div class="job-input-form-section">
-            <label class="system text-color4" for="start-time-input">Start Time:</label>
-            <input type=number id="start-time-input" name="start">
+        <div class="sectionblock" id="jobs-page__form">
+            ${jobAdder.render()}
         </div>
-        <div class="job-input-form-section">
-            <label class="system text-color4" for="end-time-input">End Time:</label>
-            <input type=number id="end-time-input" name="end">
-        </div>
-        <div class="job-input-form-section">
-            <label class="system text-color4" for="profit-input">Profit:</label>
-            <input type=number id="profit-input" name="profit">
-        </div>
-        <div class="job-input-form-section">
-            <button type="submit">Submit</button>
-        </div>
-    </form>
 
-    <div class="body-section" id="job-display-block">
-        <span class="subheader text-color4">Jobs Queue</span>
-
-        <div id="job-display-cards">
+        <div class="sectionblock" id="jobs-page__queue">
+            <span class="subheader text-color4">Jobs Queue</span>
+            ${allJobsPanel.render()}
         </div>
-    </div>
 
-    <div class="body-section" id="optimized-jobs-block">
-        <span class="subheader text-color4">Optimized Jobs</span>
-        <button id="optimized-jobs-refresh" type="button">Refresh</button>
-
-        <div id="optimized-jobs-timeline">
+        <div class="sectionblock" id="jobs-page__optimized">
+            <span class="subheader text-color4">Optimized Jobs</span>
+            ${optimizedJobsPanel.render()}
         </div>
     </div>
     `
 
     return {
         html : pageHTML,
-        attachEvents : attachJobsPageEvents
+
+        attachEvents(root) {
+            allJobsPanel.attachEvents(root);
+            jobAdder.attachEvents(root);
+            optimizedJobsPanel.attachEvents(root);
+        }
     }
 }
 
 
-export function attachJobsPageEvents() : void {
+// async function recomputeSchedule() {
+//     appState.optimalSubset = await SchedulerAPI.optimizeSchedule(appState.allJobs);
+// }
 
-}
+
+// async function refreshOptimalJobset(event : MouseEvent) {
+//     event.preventDefault();
+
+//     const result = await SchedulerAPI.optimizeSchedule(appState.allJobs);
+//     const optimizedJobsTimeline = document.getElementsByClassName("comp__optimized-timeline")[0] as HTMLDivElement;
+//     optimizedJobsTimeline.textContent = result.getTotalProfit().toString();
+// }

@@ -7,7 +7,7 @@ page is exited out of
 
 export type Page = {
     html : string;
-    attachEvents : () => void;
+    attachEvents : (root : HTMLElement) => void;
     cleanup ?: () => void;
 }
 

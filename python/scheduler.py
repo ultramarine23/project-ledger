@@ -1,3 +1,5 @@
+## MARK
+
 import sys
 import json
 
@@ -6,7 +8,7 @@ from job import Job
 from job_collection import JobCollection
 
 
-def maximize_profit(job_coll : JobCollection):
+def maximize_profit(job_coll : JobCollection) -> JobCollection:
     # sort by end-time -> O(n log n) time
     #
     # sorted() uses timsort, an optimized variant of mergesort that
@@ -20,7 +22,7 @@ def maximize_profit(job_coll : JobCollection):
     dp_ends = [0]
     max_profits = [0]
     dp_prev = [-1]
-
+    chosen = [False]
 
     # weighted activity selection
     for job in jobs_sorted:
@@ -29,22 +31,28 @@ def maximize_profit(job_coll : JobCollection):
         max_candidate = max_profits[i] + job.profit
 
         if max_candidate > max_profits[-1]:
-            dp_jobs.append(job)
-            dp_ends.append(job.end)
             max_profits.append(max_candidate)
             dp_prev.append(i)
+            chosen.append(True)
+        else:
+            max_profits.append(max_profits[-1])
+            dp_prev.append(len(max_profits) - 2)
+            chosen.append(False)
     
 
     # reconstruction
     optimal_jobs = []
-    j = len(dp_jobs) - 1
+    j = len(max_profits) - 1
 
     while j > 0:
-        optimal_jobs.append(dp_jobs[j])
-        j = dp_prev[j]
+        if chosen[j]:
+            optimal_jobs.append(jobs_sorted[j - 1])
+            j = dp_prev[j]
+        else:
+            j -= 1
 
-    optimal_jobs.reverse()
     optimal_coll = JobCollection(optimal_jobs)
+    print("optimal profit: ", optimal_coll.get_total_profit(), file=sys.stderr)
 
     return optimal_coll
 
@@ -53,9 +61,8 @@ def main():
     raw_input = sys.stdin.read()
     raw_jsondict = json.loads(raw_input)
     collection = JobCollection.from_jsondict(raw_jsondict)
-    
+    print(collection, file=sys.stderr)
     result = maximize_profit(collection).to_jsondict()
-
     # json.dumps() is the python equivalent to stringify, converts dict -> json
     # output the json string into the output stream, for typescript to read    
     print(json.dumps(result))

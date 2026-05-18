@@ -1,0 +1,45 @@
+:root {
+    --color1 : #2D3250;
+    --color2 : #424769;
+    --color3 : #676F9D;
+    --color4 : #A7ABC2;
+    --color5 : #E7E7E7;
+    --color6 : #F9B17A;
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.window {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+    background-color: var(--color4);
+}
+
+#sidebar {
+    width: 25%;
+    height: 100vh;
+    background-color: var(--color3);
+}
+
+#app {
+    width: 75%;
+    background-color: var(--color4);
+    margin: 1em;
+}
+
+.sectionblock {
+    background-color: var(--color2);
+    padding: 1em;
+    border-radius: 5px;
+}
+
+.formblock {
+    display: block;
+    width: 50%;
+    margin: 10px 0;
+}

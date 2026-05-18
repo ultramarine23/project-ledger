@@ -1,0 +1,48 @@
+/* form block */
+
+#jobs-page__form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* queue block */
+
+#jobs-page__queue {
+    display: flex;
+    flex-direction: column;
+}
+
+.comp__jobcard-panel {
+    display: flex;
+    flex-direction: row;
+    height: 120px;
+    overflow: auto;
+    gap: 1em;
+}
+
+.comp__jobcard {
+    display: block;
+    background-color: var(--color6);
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+/* optimized block */
+
+#jobs-page__optimized {
+    display: flex;
+    flex-direction: column;
+}
+
+.comp__optimized-timeline {
+    display: flex;
+    flex-direction: row;
+    overflow: auto;
+}
+
+.comp__optimized-refresher {
+    display: block;
+}
