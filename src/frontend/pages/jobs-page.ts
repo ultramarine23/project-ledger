@@ -19,6 +19,10 @@ export function JobsPage() : Page {
     <div id="jobs-page">
         <span class="header text-color6">Freelancer Scheduler</span>
 
+        <button id="page-redirect_link">
+            Go to Calculator
+        </button>
+
         <div class="sectionblock" id="jobs-page__form">
             ${jobAdder.render()}
         </div>
@@ -42,6 +46,15 @@ export function JobsPage() : Page {
             allJobsPanel.attachEvents(root);
             jobAdder.attachEvents(root);
             optimizedJobsPanel.attachEvents(root);
+
+            const calRedirect = document.getElementById("page-redirect_link")
+
+            calRedirect?.addEventListener("click", () => {
+
+                loadPage(
+                    getPage("calculator")
+                );
+            })
         }
     }
 }
