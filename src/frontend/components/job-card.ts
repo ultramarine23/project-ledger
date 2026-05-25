@@ -3,36 +3,39 @@ import { Component } from "../types/component";
 
 export class JobCard implements Component {
     constructor(
-        private job : Job
+        private job: Job,
+        private onDelete: (id: number) => void
     ) {}
 
     render(): string {
         return `
-        <div class="comp__jobcard">
-            <div class="jobcard__top">
-                <span class="job-card_text">
-                    ${this.job.profit}
-                </span>
+        <div class="comp__jobcard" data-job-id="${this.job.jobID}">
+            
+            <button
+                class="jobcard__delete"
+                data-job-id="${this.job.jobID}"
+            >
+                ✕
+            </button>
+
+            <div class="job-card_text">
+                <strong>${this.job.client}</strong><br>
+                Start: ${this.job.start}<br>
+                End: ${this.job.end}<br>
+                Profit: $${this.job.profit}
             </div>
 
-            <div class="jobcard__meta">
-                <span class="job-card_text">
-                    Client: ${this.job.client}
-                </span>
-
-                <span class="job-card_text">
-                    Location: ${this.job.location}
-                </span>
-            </div>
-
-            <div class="jobcard_footer">
-                <p class = "job-card_text">${this.job.start} to ${this.job.end}</p>
-            </div>
         </div>
-        `
+        `;
     }
 
     attachEvents(root: HTMLElement): void {
-        
+        const deleteBtn = root.querySelector(
+            `.jobcard__delete[data-job-id="${this.job.jobID}"]`
+        );
+
+        deleteBtn?.addEventListener("click", () => {
+            this.onDelete(this.job.jobID);
+        });
     }
 }

@@ -29,6 +29,10 @@ export default class JobCollection {
             generationTime : this.generationTime.toISOString()
         };
     }
+
+    delete(id: number): void {
+    this.jobs = this.jobs.filter(job => job.jobID !== id);
+}
        
     static fromJSON(jsonObj : any) : JobCollection {
         return new JobCollection(
