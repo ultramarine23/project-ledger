@@ -15,7 +15,7 @@ export function JobsPage() : Page {
     const jobAdder : JobAdder = new JobAdder(() => {loadPage(getPage("jobs"))});
     const optimizedJobsPanel : OptimizedJobsPanel = new OptimizedJobsPanel();
 
-    let pageHTML : string = `
+    let pageHTML: string = `
     <div id="jobs-page">
         <span class="header text-color6">Freelancer Scheduler</span>
 
