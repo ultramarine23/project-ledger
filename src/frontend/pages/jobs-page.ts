@@ -11,11 +11,17 @@ import { Page } from "../types/page";
 
 export function JobsPage() : Page {
     // instantiate block components
-    const allJobsPanel : AllJobsPanel = new AllJobsPanel(appState.allJobs);
+    const allJobsPanel = new AllJobsPanel(
+    appState.allJobs,
+    (id: number) => {
+        appState.allJobs.delete(id);
+        loadPage(getPage("jobs")); // or re-render
+    }
+);
     const jobAdder : JobAdder = new JobAdder(() => {loadPage(getPage("jobs"))});
     const optimizedJobsPanel : OptimizedJobsPanel = new OptimizedJobsPanel();
 
-    let pageHTML : string = `
+    let pageHTML: string = `
     <div id="jobs-page">
         <span class="header text-color6">Freelancer Scheduler</span>
 

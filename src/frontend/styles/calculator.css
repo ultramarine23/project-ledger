@@ -1,27 +1,21 @@
 /* =========================
-   🌈 PIXEL POKEMON THEME
+   🧮 PROFESSIONAL CALCULATOR THEME
 ========================= */
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 #calc-page {
-    border-radius: 18px;
-    padding: 20px;
+    border-radius: 16px;
+    padding: 24px;
 
-    /* soft pokemon-style gradient */
-    background: linear-gradient(
-        135deg,
-        #8ec5fc,
-        #b8f1ff,
-        #b8ffd6
-    );
+    background: #f7f9fc;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
 
-    /* chunky pixel shadow */
-    box-shadow:
-        6px 6px 0px black;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
 
-    font-family: "Press Start 2P", monospace;
-    color: black;
+    font-family: "Inter", sans-serif;
+    color: #111827;
 }
 
 /* =========================
@@ -32,20 +26,17 @@
     padding: 20px;
     margin-bottom: 20px;
 
-    background: linear-gradient(
-        to right,
-        #ffcb05,
-        #ffde59
-    );
+    background: #ffffff;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
 
     text-align: center;
 
     font-size: 18px;
+    font-weight: 600;
 
-    box-shadow: 4px 4px 0 black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* =========================
@@ -55,21 +46,17 @@
 .calc-stats {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 16px;
 
     margin-bottom: 20px;
     padding: 20px;
 
-    background: linear-gradient(
-        to right,
-        #ff9a9e,
-        #fad0c4
-    );
+    background: #ffffff;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
 
-    box-shadow: 4px 4px 0 black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* =========================
@@ -79,20 +66,15 @@
 .stat-card {
     flex: 1;
 
-    padding: 20px;
+    padding: 18px;
 
-    background: linear-gradient(
-        135deg,
-        #a18cd1,
-        #fbc2eb
-    );
+    background: #f9fafb;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
 
-    box-shadow: 4px 4px 0 black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 
-    /* center everything */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -100,18 +82,20 @@
 
     text-align: center;
 
-    min-height: 120px;
+    min-height: 110px;
 }
 
-/* small top text */
 .stat-title {
-    font-size: 10px;
-    margin-bottom: 14px;
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
-/* big value text */
 .stat-value {
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #111827;
 }
 
 /* =========================
@@ -124,16 +108,12 @@
 
     padding: 20px;
 
-    background: linear-gradient(
-        to right,
-        #667eea,
-        #764ba2
-    );
+    background: #ffffff;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
 
-    box-shadow: 4px 4px 0 black;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* =========================
@@ -145,16 +125,12 @@
 
     padding: 20px;
 
-    background: linear-gradient(
-        135deg,
-        #43e97b,
-        #38f9d7
-    );
+    background: #f9fafb;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
 
-    box-shadow: 4px 4px 0 black;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 /* =========================
@@ -166,22 +142,10 @@
 
     padding: 20px;
 
-    background: linear-gradient(
-        135deg,
-        #fa709a,
-        #fee140
-    );
+    background: #ffffff;
 
-    border: 4px solid black;
+    border: 1px solid #e5e7eb;
     border-radius: 12px;
 
-    box-shadow: 4px 4px 0 black;
-}
-
-/* =========================
-   ✨ OPTIONAL PIXEL FEEL
-========================= */
-
-* {
-    image-rendering: pixelated;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }

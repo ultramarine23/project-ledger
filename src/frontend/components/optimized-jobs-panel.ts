@@ -14,9 +14,11 @@ export class OptimizedJobsPanel implements Component {
     render(): string {
         const coll = appState.optimalSubset;
 
-        coll.jobs.map((job) => {
-            this.cards.push(new JobCard(job));
-        })
+        this.cards = coll.jobs.map((job) =>
+            new JobCard(job, (id: number) => {
+                console.log("Delete job:", id);
+            })
+        );
 
         return `
         <div class="comp__optimized">

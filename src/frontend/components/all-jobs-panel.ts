@@ -5,11 +5,16 @@ import { JobCard } from "./job-card";
 export class AllJobsPanel implements Component {
     private cards : JobCard[] = [];
 
-    constructor(coll : JobCollection) {
-        coll.jobs.map((job) => {
-            this.cards.push(new JobCard(job));
-        });
-    }
+    constructor(
+    coll: JobCollection,
+    private onDelete: (id: number) => void
+) {
+    coll.jobs.forEach((job) => {
+        this.cards.push(
+            new JobCard(job, this.onDelete)
+        );
+    });
+}
 
     render(): string {
         return `
