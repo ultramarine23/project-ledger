@@ -5,12 +5,14 @@ from scheduler_node import SchedulerNode
 import sys
 from bisect import bisect_right
 
+BEAM_SIZE = 5
+
 # important terms: 
 #   Schedule      = an SLL of SchedulerNodes, usually represented by its
 #                   tail node
 #   SchedulerNode = an SLL node representing
 
-def multi_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
+def beam_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
     # dp[i] represents the top K best schedulings
     # up to the event with index i, basically a cooler WAS >B)
     jobs = base_coll.jobs
@@ -63,7 +65,7 @@ def multi_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
 
 
 
-res = multi_scheduler(
+res = beam_scheduler(
     JobCollection([
         Job(1, 2, 5),
         Job(3, 4, 10),

@@ -48,14 +48,14 @@ export function JobsPage() : Page {
 
 
 // async function recomputeSchedule() {
-//     appState.optimalSubset = await SchedulerAPI.optimizeSchedule(appState.allJobs);
+//     appState.optimalSubset = await SchedulerAPI.classicWAS(appState.allJobs);
 // }
 
 
 // async function refreshOptimalJobset(event : MouseEvent) {
 //     event.preventDefault();
 
-//     const result = await SchedulerAPI.optimizeSchedule(appState.allJobs);
+//     const result = await SchedulerAPI.classicWAS(appState.allJobs);
 //     const optimizedJobsTimeline = document.getElementsByClassName("comp__optimized-timeline")[0] as HTMLDivElement;
 //     optimizedJobsTimeline.textContent = result.getTotalProfit().toString();
 // }

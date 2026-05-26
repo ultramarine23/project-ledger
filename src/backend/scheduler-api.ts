@@ -5,12 +5,12 @@ import { PythonService } from "./python-service.js";
 
 export class SchedulerAPI {
     // fetch wrapper for python/scheduler.py
-    static async optimizeSchedule(
+    static async classicWAS(
         coll : JobCollection
     ) {
         const scriptPath = path.join(
             __dirname,
-            "../../python/scheduler.py"
+            "../../python/vanilla_scheduler.py"
         );
 
         const pythonOutput = await PythonService.runScript(

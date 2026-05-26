@@ -32,7 +32,7 @@ export class OptimizedJobsPanel implements Component {
     attachEvents(root: HTMLElement): void {
         //const button = root.querySelector(".comp__optimized-refresher") as HTMLButtonElement;
         //button.addEventListener("click", async (event : Event) => {
-        //    appState.optimalSubset = await SchedulerAPI.optimizeSchedule(appState.allJobs);
+        //    appState.optimalSubset = await SchedulerAPI.classicWAS(appState.allJobs);
         //});
     }
 }

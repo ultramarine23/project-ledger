@@ -52,8 +52,6 @@ def maximize_profit(job_coll : JobCollection) -> JobCollection:
             j -= 1
 
     optimal_coll = JobCollection(optimal_jobs)
-    print("optimal profit: ", optimal_coll.get_total_profit(), file=sys.stderr)
-
     return optimal_coll
 
 
