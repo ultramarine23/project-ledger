@@ -1,6 +1,7 @@
 from job_collection import JobCollection
 from job import Job
 from scheduler_node import SchedulerNode
+import json
 
 import sys
 from bisect import bisect_right
@@ -64,20 +65,39 @@ def beam_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
     return dp
 
 
+def main():
+    raw_input = sys.stdin.read()
+    raw_jsondict = json.loads(raw_input)
+    
+    collection = JobCollection.from_jsondict(raw_jsondict['coll'])
+    k = raw_jsondict['k']
 
-res = beam_scheduler(
-    JobCollection([
-        Job(1, 2, 5),
-        Job(3, 4, 10),
-        Job(5, 6, 20),
-        Job(7, 8, 15),
-        Job(9, 10, 12),
-    ]), 100
-)
+    result = beam_scheduler(
+        collection, 
+        k
+    ).to_jsondict()
 
-for subarr in res:
-    num = 1
-    for elem in subarr:
-        print(f"#{num} : {elem} = {elem.total_profit}")
-        num += 1
-    print()
+    # json.dumps() is the python equivalent to stringify, converts dict -> json
+    # output the json string into the output stream, for typescript to read    
+    print(json.dumps(result))
+
+if __name__ == "__main__":
+    main()
+
+
+# res = beam_scheduler(
+#     JobCollection([
+#         Job(1, 2, 5),
+#         Job(3, 4, 10),
+#         Job(5, 6, 20),
+#         Job(7, 8, 15),
+#         Job(9, 10, 12),
+#     ]), 100
+# )
+
+# for subarr in res:
+#     num = 1
+#     for elem in subarr:
+#         print(f"#{num} : {elem} = {elem.total_profit}")
+#         num += 1
+#     print()

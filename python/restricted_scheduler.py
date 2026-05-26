@@ -9,7 +9,7 @@ from job_collection import JobCollection
 def restricted_scheduler(
         job_coll : JobCollection, 
         max_hours : int, 
-        excl_times : list[tuple],
+        excl_times : list[list[int]],
         excl_job_ids : list[int]
     ) -> JobCollection:
 
@@ -113,9 +113,19 @@ def restricted_scheduler(
 def main():
     raw_input = sys.stdin.read()
     raw_jsondict = json.loads(raw_input)
-    collection = JobCollection.from_jsondict(raw_jsondict)
-    print(collection, file=sys.stderr)
-    result = restricted_scheduler(collection, 8).to_jsondict()
+    
+    collection = JobCollection.from_jsondict(raw_jsondict['coll'])
+    max_hours = raw_jsondict['maxHours']
+    excl_times = raw_jsondict['exclTimes']
+    excl_job_ids = raw_jsondict['exclJobIDs']
+
+    result = restricted_scheduler(
+        collection, 
+        max_hours, 
+        excl_times, 
+        excl_job_ids
+    ).to_jsondict()
+
     # json.dumps() is the python equivalent to stringify, converts dict -> json
     # output the json string into the output stream, for typescript to read    
     print(json.dumps(result))
