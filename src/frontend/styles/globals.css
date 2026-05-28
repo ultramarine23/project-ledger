@@ -1,10 +1,67 @@
 :root {
-    --color1 : #2D3250;
-    --color2 : #424769;
-    --color3 : #676F9D;
-    --color4 : #A7ABC2;
-    --color5 : #E7E7E7;
-    --color6 : #F9B17A;
+
+    /* ================================================= */
+    /*                     BACKGROUNDS                    */
+    /* ================================================= */
+
+    --bg-main: #0f172a;
+    --bg-sidebar: #111827;
+    --bg-surface: #172033;
+    --bg-card: #1e293b;
+    --bg-card-hover: #2b3a55;
+    --bg-input: #243047;
+
+    /* ================================================= */
+    /*                  PRIMARY BRANDING                 */
+    /* ================================================= */
+
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+
+    /* ================================================= */
+    /*                    ACCENT COLORS                  */
+    /* ================================================= */
+
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+
+    --accent-soft: rgba(139, 92, 246, 0.15);
+
+    /* ================================================= */
+    /*                       TEXT                         */
+    /* ================================================= */
+
+    --text-main: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+
+    /* ================================================= */
+    /*                    STATUS COLORS                  */
+    /* ================================================= */
+
+    --success: #22c55e;
+
+    /* reserved properly for warnings now */
+    --warning: #f59e0b;
+
+    --danger: #ef4444;
+
+    --info: #38bdf8;
+
+    /* ================================================= */
+    /*                      BORDERS                      */
+    /* ================================================= */
+
+    --border: #334155;
+    --border-light: #475569;
+
+    /* ================================================= */
+    /*                      SHADOWS                      */
+    /* ================================================= */
+
+    --shadow-sm: rgba(0, 0, 0, 0.18);
+    --shadow-md: rgba(0, 0, 0, 0.28);
+
 }
 
 
@@ -21,15 +78,35 @@
 }
 
 #sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
     width: 25%;
     height: 100vh;
-    background-color: var(--color3);
+
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+
+    padding: 1.5rem;
+    box-sizing: border-box;
+
+    overflow-y: auto;
 }
 
 #app {
+
+    margin-left: 25%;
+
     width: 75%;
-    background-color: var(--color4);
-    margin: 1em;
+    min-height: 100vh;
+
+    background: var(--bg-main);
+
+    padding: 2rem;
+    box-sizing: border-box;
 }
 
 .sectionblock {

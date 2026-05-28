@@ -14,6 +14,7 @@ import { getPage } from "./router/router.js";
 import { SchedulerAPI } from "../backend/scheduler-api.js";
 import JobCollection from "../entities/job-collection.js";
 import Job from "../entities/job.js";
+import { Sidebar } from "./components/sidebar.js";
 
 let currentPage: Page | null = null;
 
@@ -25,6 +26,10 @@ export function loadPage(page: Page) {
     page.attachEvents(app);   
     currentPage = page;
 }
+
+const sidebar_inst : Sidebar = new Sidebar();
+const container : HTMLDivElement = document.getElementById("sidebar") as HTMLDivElement;
+container.innerHTML = sidebar_inst.render();
 
 window.addEventListener("DOMContentLoaded", () => {
     loadPage(getPage("jobs"));

@@ -14,10 +14,11 @@ BEAM_SIZE = 5
 #   SchedulerNode = an SLL node representing
 
 def beam_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
-    # dp[i] represents the top K best schedulings
-    # up to the event with index i, basically a cooler WAS >B)
+    # dp[i] is a list of the top K best schedulings up to jobs[i]
+    # ordered from most to least promising, basically a cooler WAS >B)
+    # but also more greedy and less accurate
     jobs = base_coll.jobs
-    dp : list[SchedulerNode] = [None] * len(jobs)
+    dp : list[list[SchedulerNode]] = [None] * len(jobs)
 
     # similar to vanilla WAS, sort the jobs based on ends
     # this runs in O(n log n) time
@@ -62,6 +63,7 @@ def beam_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
         
         dp[j] = merged[0:k_adjusted]
     
+    print(dp)
     return dp
 
 
@@ -82,22 +84,23 @@ def main():
     print(json.dumps(result))
 
 if __name__ == "__main__":
-    main()
+    pass
+    #main()
 
 
-# res = beam_scheduler(
-#     JobCollection([
-#         Job(1, 2, 5),
-#         Job(3, 4, 10),
-#         Job(5, 6, 20),
-#         Job(7, 8, 15),
-#         Job(9, 10, 12),
-#     ]), 100
-# )
+res = beam_scheduler(
+    JobCollection([
+        Job(1, 2, 5),
+        Job(3, 4, 10),
+        Job(5, 6, 20),
+        Job(7, 8, 15),
+        Job(9, 10, 12),
+    ]), 100
+)
 
-# for subarr in res:
-#     num = 1
-#     for elem in subarr:
-#         print(f"#{num} : {elem} = {elem.total_profit}")
-#         num += 1
-#     print()
+for subarr in res:
+    num = 1
+    for elem in subarr:
+        print(f"#{num} : {elem} = {elem.total_profit}")
+        num += 1
+    print()

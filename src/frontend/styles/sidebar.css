@@ -1,0 +1,103 @@
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sidebar-element {
+    padding: 15px;
+}
+
+.sidebar-button {
+    padding: 1em;
+    align-items: center;
+}
+
+/* ================================================= */
+/*                    SIDEBAR BASE                   */
+/* ================================================= */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 280px;
+    height: 100vh;
+
+    background: var(--bg-sidebar);
+
+    border-right: 1px solid var(--border);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+
+    box-sizing: border-box;
+}
+
+/* ================================================= */
+/*                    APP BRANDING                   */
+/* ================================================= */
+
+.sidebar-header {
+    padding-bottom: 1.25rem;
+    margin-bottom: 1rem;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.sidebar-logo-icon {
+    height: 48px;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ================================================= */
+/*                     NAVIGATION                    */
+/* ================================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--bg-card);
+    color: var(--text-main);
+    font-size: 16px;
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.2s;
+}
+
+/* hover state */
+
+.sidebar-link:hover {
+    background-color: var(--accent-soft);
+    color: var(--text-main);
+    transform: translateX(4px);
+}
+
+/* active/current page */
+
+.sidebar-link.active {
+    background-color: var(--accent);
+    color: var(--text-main);
+    border: 1px solid rgba(139, 92, 246, 0.25);
+}
