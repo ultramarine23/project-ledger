@@ -11,6 +11,9 @@ if you wanna edit the actual pages, the pages folder is ur friend ;))
 
 import { Page } from "./types/page.js";
 import { getPage } from "./router/router.js";
+import { SchedulerAPI } from "../backend/scheduler-api.js";
+import JobCollection from "../entities/job-collection.js";
+import Job from "../entities/job.js";
 
 let currentPage: Page | null = null;
 

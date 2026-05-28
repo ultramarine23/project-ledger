@@ -7,6 +7,13 @@ class JobCollection:
         self.jobs = jobs
         self.generation_time = generation_time
     
+    def __repr__(self):
+        return f"""
+        JobCollection
+        total profit: {self.get_total_profit()}
+        timeline: {" -> ".join([str(job.profit) for job in self.jobs])}
+        """
+
     def add_job(self, job : Job):
         self.jobs.append(job)
     
