@@ -9,18 +9,18 @@ export class Sidebar implements Component {
 
         <nav class="sidebar-nav">
 
-            <button type="button" class="sidebar-link">
+            <button id="nav-jobs" type="button" class="sidebar-link">
                 <span class="sidebar-link-icon">💼</span>
                 <span class="paragraph">Jobs</span>
             </button>
 
 
-            <button type="button" class="sidebar-link">
+            <button id="nav-calc" type="button" class="sidebar-link">
                 <span class="sidebar-link-icon">🔢</span>
                 <span class="paragraph">Calculator</span>
             </button>
 
-            <button type="button" class="sidebar-link">
+            <button id="nav-settings" type="button" class="sidebar-link">
                 <span class="sidebar-link-icon">⚙</span>
                 <span class="paragraph">Settings</span>
             </button>

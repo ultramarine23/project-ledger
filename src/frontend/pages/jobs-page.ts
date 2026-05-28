@@ -24,24 +24,14 @@ export function JobsPage() : Page {
 
     let pageHTML: string = `
     <div id="jobs-page">
-        <span class="header text-color6">Freelancer Scheduler</span>
-
-        <button id="page-redirect_link">
-            Go to Calculator
-        </button>
-
         <div class="sectionblock" id="jobs-page__form">
+            <span class="semiheader color-primary">+ Add new Job</span>
             ${jobAdder.render()}
         </div>
 
         <div class="sectionblock" id="jobs-page__queue">
             <span class="subheader text-color4">Jobs Queue</span>
             ${allJobsPanel.render()}
-        </div>
-
-        <div class="sectionblock" id="jobs-page__optimized">
-            <span class="subheader text-color4">Optimized Jobs</span>
-            ${optimizedJobsPanel.render()}
         </div>
     </div>
     `

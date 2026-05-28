@@ -47,6 +47,12 @@
     font-size: 24px;
 }
 
+.semiheader {
+    display: block;
+    font-size: 28px;
+    font-weight: 600;
+}
+
 .header {
     display: block;
     font-size: 32px;

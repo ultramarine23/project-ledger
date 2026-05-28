@@ -1,39 +1,9 @@
 /* =========================================
-   PROFESSIONAL FREELANCER SCHEDULER THEME
-========================================= */
-
-/* Google Font Import */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* =========================================
-   GLOBAL
-========================================= */
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background:
-        radial-gradient(circle at top left, #1e293b, #0f172a 55%);
-    
-    min-height: 100vh;
-
-    font-family: "Inter", sans-serif;
-
-    color: #e2e8f0;
-}
-
-/* =========================================
    PAGE CONTAINER
 ========================================= */
 
 #jobs-page {
     width: min(1400px, 95%);
-    margin: 40px auto;
-
     padding: 32px;
 
     display: flex;

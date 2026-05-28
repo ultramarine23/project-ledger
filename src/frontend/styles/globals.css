@@ -66,19 +66,29 @@
 
 
 * {
+    font-family: "Inter", sans-serif;
+    color: var(--text-muted);
     padding: 0;
     margin: 0;
+    /*outline: 1px solid red;*/
 }
+
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    background-color: var(--bg-main);
+}
+
 
 .window {
     display: flex;
     flex-direction: row;
     gap: 1.5em;
-    background-color: var(--color4);
+    background: var(--bg-main);
 }
 
 #sidebar {
-
     position: fixed;
 
     top: 0;
@@ -104,8 +114,7 @@
     min-height: 100vh;
 
     background: var(--bg-main);
-
-    padding: 2rem;
+    padding: 0 2rem 2rem 2rem;
     box-sizing: border-box;
 }
 
@@ -119,4 +128,20 @@
     display: block;
     width: 50%;
     margin: 10px 0;
+}
+
+.color-primary {
+    color: var(--primary);
+}
+
+.color-main {
+    color: var(--text-main);
+}
+
+.color-secondary {
+    color: var(--text-secondary);
+}
+
+.color-muted {
+    color: var(--text-muted);
 }
