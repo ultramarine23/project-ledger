@@ -23,12 +23,12 @@ class AppState {
 
     async registerJob(job : Job) {
         this.allJobs.addJob(job);
-        this.optimalSubset = await SchedulerAPI.optimizeSchedule(this.allJobs);
+        this.optimalSubset = await SchedulerAPI.classicWAS(this.allJobs);
     }
 
     async deregisterJob(job : Job) {
         this.allJobs.removeJob(job);
-        this.optimalSubset = await SchedulerAPI.optimizeSchedule(this.allJobs);
+        this.optimalSubset = await SchedulerAPI.classicWAS(this.allJobs);
     }
 }
 

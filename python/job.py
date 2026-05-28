@@ -16,6 +16,9 @@ class Job:
         self.profit = profit
         self.location = location
         self.client = client
+
+    def __repr__(self):
+        return f"{self.profit}"
     
     def to_jsondict(self):
         return {
