@@ -1,5 +1,6 @@
 import Job from "../../entities/job";
 import { Component } from "../types/component";
+import { appState } from "../app-state";
 
 export class JobCard implements Component {
     constructor(
@@ -18,6 +19,10 @@ export class JobCard implements Component {
                 ✕
             </button>
 
+           <button class="jobcard__hide" data-job-id="${this.job.jobID}">
+                Hide
+            </button>
+
             <div class="job-card_text">
                 <strong>${this.job.client}</strong><br>
                 Start: ${this.job.start}<br>
@@ -34,8 +39,10 @@ export class JobCard implements Component {
             `.jobcard__delete[data-job-id="${this.job.jobID}"]`
         );
 
+        // 1. Delete Button Logic (Fixed the missing closing syntax here)
         deleteBtn?.addEventListener("click", () => {
             this.onDelete(this.job.jobID);
-        });
-    }
-}
+        }); 
+
+    } // Closes attachEvents
+} // Closes JobCard Class

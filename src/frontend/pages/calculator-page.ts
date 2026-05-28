@@ -1,6 +1,7 @@
 import { Page } from "../types/page";
 import { OptimizedJobsPanel } from "../components/optimized-jobs-panel";
 import { stat } from "node:fs";
+import { appState } from "../app-state";
 
 export function CalculatorPage(): Page {
     const optimizedJobs = new OptimizedJobsPanel();
@@ -50,17 +51,24 @@ export function CalculatorPage(): Page {
 
         <!-- content where the actual jobs is shown-->
         <div id="calc-page_optimized">
-
-            <!-- 📌 Left panel placeholder -->
-            <div class="calc-sidebar">
-                <span class="section-title">${state.insights.title}</span>
-                <p>${state.insights.message}</p>
+            <div class="algo-settings">
+                <span class="section-title">Algorithm Settings</span>
+                <div style="margin-top: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="chk-allow-suggestion" value="beam">
+                        Allow suggestion
+                    </label>
+                </div>
             </div>
+
+            
 
             <!-- 📦 Optimized Jobs -->
             <div class="calc-jobs">
                 ${optimizedJobs.render()}
             </div>
+
+            
 
         </div>
 
@@ -73,6 +81,25 @@ export function CalculatorPage(): Page {
         html: pageHTML,
         attachEvents(root) {
             optimizedJobs.attachEvents(root);
+            // Grab the new checkbox
+            const suggestionCheckbox = root.querySelector("#chk-allow-suggestion") as HTMLInputElement;
+
+            // Listen for when it is checked or unchecked
+            suggestionCheckbox?.addEventListener("change", (e) => {
+                const target = e.target as HTMLInputElement;
+                const isChecked = target.checked;
+                const checkboxValue = target.value; // This will equal "beam"
+
+                if (isChecked) {
+                    console.log(`Suggestion enabled! Value is: ${checkboxValue}`);
+                    // TODO: Save "beam" to your appState or local state here
+                } else {
+                    console.log("Suggestion disabled.");
+                    // TODO: Remove it from your state here
+                }
+            });
         }
+        
+        
     };
 }

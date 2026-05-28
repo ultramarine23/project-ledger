@@ -3,6 +3,7 @@ This class is a singleton (so di sya pwede i instantiate liwat) that
 controls shared data between pages
 
 the appState constant is exported to app.ts for manipulation there
+this is the "app-state.ts"
 */
 
 import { SchedulerAPI } from "../backend/scheduler-api";
@@ -18,7 +19,9 @@ class AppState {
                 new Job(9, 10, 11, 12),
             ]
         ),
-        public optimalSubset : JobCollection = new JobCollection(),
+        public optimalSubset: JobCollection = new JobCollection(),
+        public exclTimes: [Number, Number][] = [],
+        public exclJobIDs: Number[] = []
     ) {}
 
     async registerJob(job : Job) {
