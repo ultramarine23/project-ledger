@@ -15,12 +15,25 @@ import { getPage } from "./router/router.js";
 let currentPage: Page | null = null;
 
 export function loadPage(page: Page) {
-    const app : HTMLDivElement = document.getElementById("app") as HTMLDivElement;
+    const app: HTMLDivElement = document.getElementById("app") as HTMLDivElement;
 
     currentPage?.cleanup?.();
     app.innerHTML = page.html;
-    page.attachEvents(app);
+    page.attachEvents(app);   
     currentPage = page;
 }
 
-loadPage(getPage("jobs"));
+window.addEventListener("DOMContentLoaded", () => {
+    loadPage(getPage("jobs"));
+
+    const jobsBtn = document.getElementById("nav-jobs") as HTMLButtonElement;
+    const calcBtn = document.getElementById("nav-calc") as HTMLButtonElement;
+
+    jobsBtn.addEventListener("click", () => {
+        loadPage(getPage("jobs"));
+    });
+
+    calcBtn.addEventListener("click", () => {
+        loadPage(getPage("calculator"));
+    });
+});

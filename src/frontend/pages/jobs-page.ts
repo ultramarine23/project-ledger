@@ -18,7 +18,8 @@ export function JobsPage() : Page {
         loadPage(getPage("jobs")); // or re-render
     }
 );
-    const jobAdder : JobAdder = new JobAdder(() => {loadPage(getPage("jobs"))});
+    
+    const jobAdder: JobAdder = new JobAdder(() => { loadPage(getPage("jobs")) });
     const optimizedJobsPanel : OptimizedJobsPanel = new OptimizedJobsPanel();
 
     let pageHTML: string = `
