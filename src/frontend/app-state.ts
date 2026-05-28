@@ -1,11 +1,3 @@
-/*
-This class is a singleton (so di sya pwede i instantiate liwat) that
-controls shared data between pages
-
-the appState constant is exported to app.ts for manipulation there
-this is the "app-state.ts"
-*/
-
 import { SchedulerAPI } from "../backend/scheduler-api";
 import Job from "../entities/job";
 import JobCollection from "../entities/job-collection";
@@ -20,6 +12,13 @@ class AppState {
             ]
         ),
         public optimalSubset: JobCollection = new JobCollection(),
+        
+        // --- NEW ALGORITHM VARIABLES ---
+        public activeAlgo: string = "classicAlgo", 
+        public beamMaxSelections: Number = 0,
+        // -------------------------------
+        
+        public maxHrs: Number = 0,
         public exclTimes: [Number, Number][] = [],
         public exclJobIDs: Number[] = []
     ) {}
