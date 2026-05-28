@@ -69,6 +69,15 @@ export function CalculatorPage(): Page {
                         <input type="number" id="algo-excl-end" placeholder="End" style="width: 80px;">
                         <button type="button" id="btn-algo-add-excl">Add</button>
                     </div>
+                    <div id = "sel-max-work-hrs"> 
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="chk-limit-hrs">
+                            Limit Max Work Hours
+                        </label
+                    </div>
+                    <div id="inp-max-work-hrs" style="display: none; margin-top: 5px; padding-left: 24px;"> 
+                        <input type="number" id="algo-max-hrs" placeholder="e.g. 40" style="width: 100px;">
+                    </div>
                     <div id = "error-container"> </div>
                     
                     <ul id="algo-excl-list" style="margin-top: 10px; padding-left: 20px; font-size: 0.9em;"></ul>
@@ -159,6 +168,39 @@ export function CalculatorPage(): Page {
                     console.log("Updated exclTimes:", appState.exclTimes);
                 } else {
                     alert("Please enter valid numbers. Start time must be less than End time.");
+                }
+            });
+
+            // --- NEW: Max Work Hours Logic ---
+            const limitHrsCheckbox = root.querySelector("#chk-limit-hrs") as HTMLInputElement;
+            const maxHrsContainer = root.querySelector("#inp-max-work-hrs") as HTMLDivElement;
+            const maxHrsInput = root.querySelector("#algo-max-hrs") as HTMLInputElement;
+
+            // 1. Toggle visibility when checkbox is clicked
+            limitHrsCheckbox?.addEventListener("change", (e) => {
+                const isChecked = (e.target as HTMLInputElement).checked;
+                
+                if (isChecked) {
+                    maxHrsContainer.style.display = "block"; // Show the input
+                    
+                    // If they already typed a number before hiding/showing, save it to state
+                    const val = parseInt(maxHrsInput.value);
+                    if (!isNaN(val)) appState.maxHrs = val;
+                } else {
+                    maxHrsContainer.style.display = "none"; // Hide the input
+                    
+                    // When unchecked, remove the limit from appState (set to 0 or undefined)
+                    appState.maxHrs = 0; 
+                    console.log("Max hours limit disabled.");
+                }
+            });
+
+            // 2. Update AppState whenever the user types a number
+            maxHrsInput?.addEventListener("input", (e) => {
+                const val = parseInt((e.target as HTMLInputElement).value);
+                if (!isNaN(val)) {
+                    appState.maxHrs = val;
+                    console.log(`Max hours set to: ${appState.maxHrs}`);
                 }
             });
         }
