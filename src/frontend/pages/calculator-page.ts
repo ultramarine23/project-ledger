@@ -51,35 +51,16 @@ export function CalculatorPage(): Page {
 
         <!-- content where the actual jobs is shown-->
         <div id="calc-page_optimized">
-            <div class="algo-selector-panel">
-                <span class="section-title">Select Optimization Engine</span>
-                <div class="algo-options">
-                    <label class="algo-radio-label">
-                        <input type="radio" name="scheduler-algo" value="vanilla" checked>
-                        <span>Vanilla WAS</span>
-                    </label>
-                    <label class="algo-radio-label">
-                        <input type="radio" name="scheduler-algo" value="beam">
-                        <span>Beam Search (Top K)</span>
-                    </label>
-                    <label class="algo-radio-label">
-                        <input type="radio" name="scheduler-algo" value="restricted">
-                        <span>Restricted Scheduler</span>
+            <div class="algo-settings">
+                <span class="section-title">Algorithm Settings</span>
+                <div style="margin-top: 10px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="chk-allow-suggestion" value="beam">
+                        Allow suggestion
                     </label>
                 </div>
             </div>
 
-            <div class="constraints-panel" style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
-                <span class="section-title">Exclude Times</span>
-                <div style="display: flex; gap: 10px; margin-top: 10px; align-items: center;">
-                    <input type="number" id="excl-start" placeholder="Start (e.g. 0)" style="width: 100px;">
-                    <input type="number" id="excl-end" placeholder="End (e.g. 2)" style="width: 100px;">
-                    <button type="button" id="btn-add-excl">Add</button>
-                    <button type="button" id="btn-clear-excl">Clear All</button>
-                </div>
-                <ul id="excl-times-list" style="margin-top: 10px; padding-left: 20px;">
-                    </ul>
-            </div>
             
 
             <!-- 📦 Optimized Jobs -->
@@ -100,47 +81,22 @@ export function CalculatorPage(): Page {
         html: pageHTML,
         attachEvents(root) {
             optimizedJobs.attachEvents(root);
-            const startInput = root.querySelector("#excl-start") as HTMLInputElement;
-            const endInput = root.querySelector("#excl-end") as HTMLInputElement;
-            const addBtn = root.querySelector("#btn-add-excl") as HTMLButtonElement;
-            const clearBtn = root.querySelector("#btn-clear-excl") as HTMLButtonElement;
-            const listEl = root.querySelector("#excl-times-list") as HTMLUListElement;
+            // Grab the new checkbox
+            const suggestionCheckbox = root.querySelector("#chk-allow-suggestion") as HTMLInputElement;
 
-            // Ensure the array exists on appState
-            if (!appState.exclTimes) {
-                appState.exclTimes = [];
-            }
+            // Listen for when it is checked or unchecked
+            suggestionCheckbox?.addEventListener("change", (e) => {
+                const target = e.target as HTMLInputElement;
+                const isChecked = target.checked;
+                const checkboxValue = target.value; // This will equal "beam"
 
-            // Helper to visually update the UI list
-            const renderList = () => {
-                listEl.innerHTML = appState.exclTimes
-                    .map(time => `<li>Excluded: [${time[0]}, ${time[1]}]</li>`)
-                    .join("");
-            };
-
-            // Render whatever might already be saved in state
-            renderList();
-
-            // Add Button Event
-            addBtn.addEventListener("click", () => {
-                const startVal = parseInt(startInput.value);
-                const endVal = parseInt(endInput.value);
-
-                if (!isNaN(startVal) && !isNaN(endVal) && startVal < endVal) {
-                    appState.exclTimes.push([startVal, endVal]);
-                    renderList();
-                    // clear inputs for next entry
-                    startInput.value = "";
-                    endInput.value = "";
+                if (isChecked) {
+                    console.log(`Suggestion enabled! Value is: ${checkboxValue}`);
+                    // TODO: Save "beam" to your appState or local state here
                 } else {
-                    alert("Please enter valid numbers. Start must be less than End.");
+                    console.log("Suggestion disabled.");
+                    // TODO: Remove it from your state here
                 }
-            });
-            
-            // Clear Button Event
-            clearBtn.addEventListener("click", () => {
-                appState.exclTimes = []; // Empty the array in state
-                renderList();            // Empty the UI list
             });
         }
         
