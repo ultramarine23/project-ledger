@@ -20,6 +20,7 @@ class AppState {
             ]
         ),
         public optimalSubset: JobCollection = new JobCollection(),
+        public maxHrs: Number = 0,
         public exclTimes: [Number, Number][] = [],
         public exclJobIDs: Number[] = []
     ) {}
