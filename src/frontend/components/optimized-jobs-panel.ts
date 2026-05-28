@@ -3,9 +3,10 @@ import JobCollection from "../../entities/job-collection";
 import { appState } from "../app-state";
 import { Component } from "../types/component";
 import { JobCard } from "./job-card";
+import { JobsPage } from "../pages/jobs-page";
 
 export class OptimizedJobsPanel implements Component {
-    private cards : JobCard[] = [];
+    private cards: JobCard[] = [];
 
     constructor() {
         
@@ -32,9 +33,18 @@ export class OptimizedJobsPanel implements Component {
     }
 
     attachEvents(root: HTMLElement): void {
-        //const button = root.querySelector(".comp__optimized-refresher") as HTMLButtonElement;
-        //button.addEventListener("click", async (event : Event) => {
-        //    appState.optimalSubset = await SchedulerAPI.classicWAS(appState.allJobs);
-        //});
+        this.cards.forEach((card) => {
+            card.attachEvents(root)
+        });
+    
+        const button = root.querySelector(".comp__optimized-refresher") as HTMLButtonElement;
+        button.addEventListener("click", async (event: Event) => {
+            appState.optimalSubset = await SchedulerAPI.optimizeSchedule(appState.allJobs);
+            const page = JobsPage();
+            root.innerHTML = page.html;
+            page.attachEvents(root);
+        });
+
+        
     }
 }
