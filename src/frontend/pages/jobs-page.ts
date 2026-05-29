@@ -44,14 +44,6 @@ export function JobsPage() : Page {
             jobAdder.attachEvents(root);
             optimizedJobsPanel.attachEvents(root);
 
-            const calRedirect = document.getElementById("page-redirect_link")
-
-            calRedirect?.addEventListener("click", () => {
-
-                loadPage(
-                    getPage("calculator")
-                );
-            })
         }
     }
 }
