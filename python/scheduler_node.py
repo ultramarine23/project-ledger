@@ -11,7 +11,7 @@ class SchedulerNode:
             self.total_profit = job.profit
     
     def __repr__(self):
-        jobs_reprs = [repr(node.job) for node in self.to_list()]
+        jobs_reprs = [repr(node) for node in self.to_list()]
         return " -> ".join(jobs_reprs)
 
     # basically creates a new tail (the current node becomes the 
@@ -20,12 +20,12 @@ class SchedulerNode:
         node = SchedulerNode(job, self)
         return node
     
-    def to_list(self) -> list[SchedulerNode]:
+    def to_list(self) -> list[Job]:
         node = self
         out = []
 
         while node != None:
-            out.append(node)
+            out.append(node.job)
             node = node.prev
         
         return out[::-1]
