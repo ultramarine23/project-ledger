@@ -40,6 +40,7 @@ export class PythonService {
 
                 try {
                     const parsed = JSON.parse(result);
+                    console.log("parse!");
                     resolve(parsed);
                 } catch (err) {
                     reject(err);

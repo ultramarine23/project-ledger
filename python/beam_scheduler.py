@@ -63,8 +63,14 @@ def beam_scheduler(base_coll : JobCollection, k : int) -> list[JobCollection]:
         
         dp[j] = merged[0:k_adjusted]
     
-    print(dp)
-    return dp
+    top_scheds_sll = dp[-1]
+    top_scheds_lists = []
+
+    for sll in top_scheds_sll:
+        top_scheds_lists.append(JobCollection(sll.to_list()))
+    print("TOPSCHEDS YALL", top_scheds_lists, file=sys.stderr)
+
+    return top_scheds_lists
 
 
 def main():
@@ -74,33 +80,24 @@ def main():
     collection = JobCollection.from_jsondict(raw_jsondict['coll'])
     k = raw_jsondict['k']
 
-    result = beam_scheduler(
+    raw_result = beam_scheduler(
         collection, 
         k
-    ).to_jsondict()
+    )
+
+    result = [coll.to_jsondict() for coll in raw_result]
 
     # json.dumps() is the python equivalent to stringify, converts dict -> json
     # output the json string into the output stream, for typescript to read    
+    print("DIS DA RESULT! ", result, file=sys.stderr)
     print(json.dumps(result))
 
 if __name__ == "__main__":
-    pass
-    #main()
+    main()
 
-
-res = beam_scheduler(
-    JobCollection([
-        Job(1, 2, 5),
-        Job(3, 4, 10),
-        Job(5, 6, 20),
-        Job(7, 8, 15),
-        Job(9, 10, 12),
-    ]), 100
-)
-
-for subarr in res:
-    num = 1
-    for elem in subarr:
-        print(f"#{num} : {elem} = {elem.total_profit}")
-        num += 1
-    print()
+# for subcoll in res:
+#     num = 1
+#     for elem in subcoll.jobs:
+#         print(f"#{num} : {elem} = {subcoll.get_total_profit()}", file=sys.stderr)
+#         num += 1
+#     print("----", file=sys.stderr)
