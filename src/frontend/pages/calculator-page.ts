@@ -1,14 +1,10 @@
-// Import the Page interface to ensure this component follows the page structure
 import { Page } from "../types/page";
-// Import the generic AllJobsPanel instead of the OptimizedJobsPanel
-import { AllJobsPanel } from "../components/all-jobs-panel"; 
-// Import the shared state so we can read the selected algorithm and job data
+import { OptimizedJobsPanel } from "../components/optimized-jobs-panel";
 import { appState } from "../app-state";
-// Import the API to communicate with your Python backend
-import { SchedulerAPI } from "../../backend/scheduler-api"; 
 
 export function CalculatorPage(): Page {
-    // This local state handles the UI text for the stats at the top
+    const optimizedJobs = new OptimizedJobsPanel();
+
     const state = {
         headerTitle: "Calculate Schedule",
         stats: {
@@ -22,7 +18,6 @@ export function CalculatorPage(): Page {
         }
     };
 
-    // The raw HTML structure of the page
     let pageHTML: string = `
     <div id="calc-page">
 
@@ -33,15 +28,15 @@ export function CalculatorPage(): Page {
         <div class="calc-stats">
             <div class="stat-card">
                 <span class="stat-title">Total Profit</span>
-                <span class="stat-value" id="stat-profit">${state.stats.totalProfit}</span>
+                <span class="stat-value">${state.stats.totalProfit}</span>
             </div>
             <div class="stat-card">
                 <span class="stat-title">Total Hours</span>
-                <span class="stat-value" id="stat-hours">${state.stats.totalHours}</span>
+                <span class="stat-value">${state.stats.totalHours}</span>
             </div>
             <div class="stat-card">
                 <span class="stat-title">Jobs Selected</span>
-                <span class="stat-value" id="stat-count">${state.stats.jobsSelected}</span>
+                <span class="stat-value">${state.stats.jobsSelected}</span>
             </div>
         </div>
 
@@ -92,16 +87,11 @@ export function CalculatorPage(): Page {
                         </label>
                     </div>
                 </div>
+
             </div>
 
-            <div style="margin-top: 20px;">
-                <button id="btn-run-algo" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px;">
-                    Run Calculation
-                </button>
-            </div>
-
-            <div class="calc-jobs" id="optimized-results-container" style="margin-top: 20px;">
-                <p>Select your settings and run the calculation.</p>
+            <div class="calc-jobs">
+                ${optimizedJobs.render()}
             </div>
         </div>
     </div>
@@ -110,11 +100,9 @@ export function CalculatorPage(): Page {
     return {
         html: pageHTML,
         attachEvents(root) {
-            
-            // ==========================================
-            // 1. ALGORITHM SELECTION LOGIC
-            // Swaps the visible settings panels when clicking radio buttons
-            // ==========================================
+            optimizedJobs.attachEvents(root);
+
+            // --- 1. ALGORITHM SELECTION LOGIC ---
             const radios = root.querySelectorAll('input[name="algo-select"]') as NodeListOf<HTMLInputElement>;
             const panelRestrict = root.querySelector("#panel-restrict") as HTMLDivElement;
             const panelBeam = root.querySelector("#panel-beam") as HTMLDivElement;
@@ -123,14 +111,15 @@ export function CalculatorPage(): Page {
                 radio.addEventListener("change", (e) => {
                     const selectedAlgo = (e.target as HTMLInputElement).value;
                     
-                    // Update global state so the calculate button knows what to run
+                    // Save to state
                     appState.activeAlgo = selectedAlgo;
-                    
-                    // Reset panels to hidden
+                    console.log(`Algorithm selected: ${appState.activeAlgo}`);
+
+                    // Hide all panels first
                     panelRestrict.style.display = "none";
                     panelBeam.style.display = "none";
 
-                    // Show the specific panel based on user choice
+                    // Show specific panel based on selection
                     if (selectedAlgo === "restrictAlgo") {
                         panelRestrict.style.display = "block";
                     } else if (selectedAlgo === "beamAlgo") {
@@ -139,27 +128,24 @@ export function CalculatorPage(): Page {
                 });
             });
 
-            // ==========================================
-            // 2. BEAM ALGO LOGIC
-            // Saves the user's typed 'Max Selections' to the appState
-            // ==========================================
+            // --- 2. BEAM ALGO LOGIC ---
             const beamMaxInput = root.querySelector("#algo-beam-max") as HTMLInputElement;
             beamMaxInput?.addEventListener("input", (e) => {
                 const val = parseInt((e.target as HTMLInputElement).value);
-                if (!isNaN(val)) appState.beamMaxSelections = val;
+                if (!isNaN(val)) {
+                    appState.beamMaxSelections = val;
+                    console.log(`Beam max selections set to: ${appState.beamMaxSelections}`);
+                }
             });
 
-            // ==========================================
-            // 3. RESTRICT ALGO LOGIC
-            // Handles excluding times and limiting max work hours
-            // ==========================================
+
+            // --- 3. RESTRICT ALGO LOGIC (Exclude Times & Max Hours) ---
             const startInput = root.querySelector("#algo-excl-start") as HTMLInputElement;
             const endInput = root.querySelector("#algo-excl-end") as HTMLInputElement;
             const addBtn = root.querySelector("#btn-algo-add-excl") as HTMLButtonElement;
             const listEl = root.querySelector("#algo-excl-list") as HTMLUListElement;
             const errorMssg = root.querySelector("#error-container") as HTMLDivElement;
             
-            // Helper function to draw the list of excluded times
             const renderExclList = () => {
                 if (!listEl) return;
                 listEl.innerHTML = appState.exclTimes
@@ -169,7 +155,6 @@ export function CalculatorPage(): Page {
 
             renderExclList();
 
-            // Pushes new excluded times to state when "Add" is clicked
             addBtn?.addEventListener("click", () => {
                 const startVal = parseInt(startInput.value);
                 const endVal = parseInt(endInput.value);
@@ -192,7 +177,7 @@ export function CalculatorPage(): Page {
                 }
             });
 
-            // Handles the checkbox to show/hide the max hours input
+            // Max Work Hours Checkbox
             const limitHrsCheckbox = root.querySelector("#chk-limit-hrs") as HTMLInputElement;
             const maxHrsContainer = root.querySelector("#inp-max-work-hrs") as HTMLDivElement;
             const maxHrsInput = root.querySelector("#algo-max-hrs") as HTMLInputElement;
@@ -209,80 +194,9 @@ export function CalculatorPage(): Page {
                 }
             });
 
-            // Updates state as the user types a max hour limit
             maxHrsInput?.addEventListener("input", (e) => {
                 const val = parseInt((e.target as HTMLInputElement).value);
-                // If they delete everything manually, default back to 0
-                if (!isNaN(val)) {
-                    appState.maxHrs = val;
-                } else {
-                    appState.maxHrs = 0; 
-                }
-            });
-
-
-            // ==========================================
-            // 4. EXECUTION LOGIC (Connecting frontend to backend)
-            // ==========================================
-            const runBtn = root.querySelector("#btn-run-algo") as HTMLButtonElement;
-            const resultsContainer = root.querySelector("#optimized-results-container") as HTMLDivElement;
-            
-            // This function runs when the user clicks "Run Calculation"
-            runBtn?.addEventListener("click", async () => {
-                // Temporarily disable the button so the user doesn't spam click it
-                runBtn.disabled = true;
-                runBtn.textContent = "Calculating...";
-                resultsContainer.innerHTML = "<p>Loading...</p>";
-
-                try {
-                    let optimizedJobs; // This will hold the JobCollection returned by Python
-
-                    // Check which algorithm is currently active in the state
-                    if (appState.activeAlgo === "classicAlgo") {
-                        optimizedJobs = await SchedulerAPI.classicWAS(appState.allJobs);
-                        
-                    } else if (appState.activeAlgo === "restrictAlgo") {
-                        // Note: Using "as number" because AppState defines it as uppercase 'Number', 
-                        // but your API expects lowercase 'number' primitives.
-                        optimizedJobs = await SchedulerAPI.restrictedWAS(
-                            appState.allJobs,
-                            appState.maxHrs as number,
-                            appState.exclTimes as [number, number][],
-                            appState.exclJobIDs as number[]
-                        );
-                        
-                    } else if (appState.activeAlgo === "beamAlgo") {
-                        optimizedJobs = await SchedulerAPI.beamWAS(
-                            appState.allJobs,
-                            appState.beamMaxSelections as number
-                        );
-                    }
-
-                    // Once Python is done, we update the app state
-                    if (optimizedJobs) {
-                        appState.optimalSubset = optimizedJobs;
-                        
-                        // Instantiate the AllJobsPanel with the newly returned data.
-                        // We pass an empty arrow function `() => {}` for the onDelete parameter
-                        // because we likely don't want users deleting jobs straight out of the results screen.
-                        const resultsPanel = new AllJobsPanel(optimizedJobs, () => {
-                            console.log("Delete disabled in results view.");
-                        });
-
-                        // Inject the generated HTML into our container
-                        resultsContainer.innerHTML = resultsPanel.render();
-                        // Attach the event listeners to the new cards inside the container
-                        resultsPanel.attachEvents(resultsContainer);
-                    }
-
-                } catch (error) {
-                    console.error("Failed to calculate schedule:", error);
-                    resultsContainer.innerHTML = `<p style="color:red;">Error running calculation. Check console.</p>`;
-                } finally {
-                    // Turn the button back on
-                    runBtn.disabled = false;
-                    runBtn.textContent = "Run Calculation";
-                }
+                if (!isNaN(val)) appState.maxHrs = val;
             });
         }
     };

@@ -62,6 +62,7 @@ export class SchedulerAPI {
             }
         )
 
+
         const result : JobCollection[] = [];
 
         console.log(pythonOutput[0]);
@@ -72,5 +73,6 @@ export class SchedulerAPI {
         }
 
         return result[0]
+
     }
 }
