@@ -1,7 +1,7 @@
 import Job from "../../entities/job";
 import { Component } from "../types/component"
 import { appState } from "../app-state";
-import { formatTime } from "../../backend/numberToDate";
+import { formatTime } from "../../backend/numberToTime";
 
 export class JobCard implements Component {
     constructor(
