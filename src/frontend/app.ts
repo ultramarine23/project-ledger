@@ -15,14 +15,12 @@ import { SchedulerAPI } from "../backend/scheduler-api.js";
 import JobCollection from "../entities/job-collection.js";
 import Job from "../entities/job.js";
 import { Sidebar } from "./components/sidebar.js";
-import { time, timeEnd } from "node:console";
 
 let currentPage: Page | null = null;
 
 export function loadPage(page: Page) {
     const app: HTMLDivElement = document.getElementById("app") as HTMLDivElement;
-    console.log("WOOWOOWO");
-    console.log(app);
+
     currentPage?.cleanup?.();
     app.innerHTML = page.html;
     page.attachEvents(app);   
@@ -35,15 +33,15 @@ container.innerHTML = sidebar_inst.render();
 
 window.addEventListener("DOMContentLoaded", () => {
     loadPage(getPage("jobs"));
-});
 
-const jobsBtn = document.getElementById("nav-jobs") as HTMLButtonElement;
-const calcBtn = document.getElementById("nav-calc") as HTMLButtonElement;
+    const jobsBtn = document.getElementById("nav-jobs") as HTMLButtonElement;
+    const calcBtn = document.getElementById("nav-calc") as HTMLButtonElement;
 
-jobsBtn.addEventListener("click", () => {
-    loadPage(getPage("jobs"));
-});
+    jobsBtn.addEventListener("click", () => {
+        loadPage(getPage("jobs"));
+    });
 
-calcBtn.addEventListener("click", () => {
-    loadPage(getPage("calculator"));
+    calcBtn.addEventListener("click", () => {
+        loadPage(getPage("calculator"));
+    });
 });
