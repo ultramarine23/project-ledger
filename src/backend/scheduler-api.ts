@@ -62,6 +62,13 @@ export class SchedulerAPI {
             }
         )
 
-        return JobCollection.fromJSON(pythonOutput)
+        const collections : JobCollection[] = []
+        const result = pythonOutput
+
+        result.forEach(element => {
+            collections.push(JobCollection.fromJSON(element))
+        });
+
+        return collections
     }
 }
