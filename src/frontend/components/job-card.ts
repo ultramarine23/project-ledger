@@ -37,7 +37,7 @@ export class JobCard implements Component {
                     </div>
                     <div style="display: flex; align-items: center; gap: 6px; margin-top: 4px;">
                         <span>📍</span>
-                        <span>${this.job.location || 'TBD'}</span>
+                        <span>${this.job.location || 'N/A'}</span>
                     </div>
                 </div>
 
