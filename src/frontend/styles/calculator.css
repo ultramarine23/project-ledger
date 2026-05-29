@@ -8,14 +8,14 @@
     border-radius: 16px;
     padding: 24px;
 
-    background: #f7f9fc;
+    background: var(--bg-sidebar);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
 
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-sm);
 
     font-family: "Inter", sans-serif;
-    color: #111827;
+    color: var(--bg-card);
 }
 
 /* =========================
@@ -26,9 +26,9 @@
     padding: 20px;
     margin-bottom: 20px;
 
-    background: #ffffff;
+    background: var(--bg-sidebar);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 12px;
 
     text-align: center;
@@ -36,7 +36,7 @@
     font-size: 18px;
     font-weight: 600;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow-sm);
 }
 
 /* =========================
@@ -68,9 +68,9 @@
 
     padding: 18px;
 
-    background: #f9fafb;
+    background: var(--bg-sidebar);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 12px;
 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
@@ -109,29 +109,12 @@
 
     padding: 20px;
 
-    background: #ffffff;
+    background: var(--bg-sidebar);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 12px;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-/* =========================
-   📌 SIDEBAR
-========================= */
-
-.calc-sidebar {
-    width: 30%;
-
-    padding: 20px;
-
-    background: #f9fafb;
-
-    border: 1px solid #e5e7eb;
-    border-radius: 12px;
-
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow-sm);
 }
 
 /* =========================
@@ -143,10 +126,10 @@
 
     padding: 20px;
 
-    background: #ffffff;
+    background: var(--bg-sidebar);
 
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--border);
     border-radius: 12px;
 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 2px 8px var(--shadow-sm);
 }

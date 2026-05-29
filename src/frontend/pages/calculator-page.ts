@@ -27,37 +27,21 @@ export function CalculatorPage(): Page {
     <div id="calc-page">
 
         <div class="calc-page_header">
-            Calculate Schedule
+            Select your settings and run the calculation.
         </div>
-
-        <div class="calc-stats">
-            <div class="stat-card">
-                <span class="stat-title">Total Profit</span>
-                <span class="stat-value" id="stat-profit">${state.stats.totalProfit}</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-title">Total Hours</span>
-                <span class="stat-value" id="stat-hours">${state.stats.totalHours}</span>
-            </div>
-            <div class="stat-card">
-                <span class="stat-title">Jobs Selected</span>
-                <span class="stat-value" id="stat-count">${state.stats.jobsSelected}</span>
-            </div>
-        </div>
-
+        
         <div id="calc-page_optimized">
-            <div class="algo-settings" style="margin-top: 1rem; padding: 1rem; background: #f5f5f5; border-radius: 8px;">
-                <span class="section-title">Algorithm Settings</span>
-
-                <div style="margin-top: 10px; display: flex; gap: 15px;">
+            <div class="semiheader">Calculator Settings</div>
+            <div style="padding: 1rem; border-radius: 8px;">                
+                <div style="display: flex; gap: 15px;">
                     <label style="cursor: pointer;">
-                        <input type="radio" name="algo-select" value="classicAlgo" checked> Classic
+                        <input class="subheader" type="radio" name="algo-select" value="classicAlgo" checked> Quick Solve
                     </label>
                     <label style="cursor: pointer;">
-                        <input type="radio" name="algo-select" value="restrictAlgo"> Restrict
+                        <input class="subheader" type="radio" name="algo-select" value="restrictAlgo"> Restrict
                     </label>
                     <label style="cursor: pointer;">
-                        <input type="radio" name="algo-select" value="beamAlgo"> Beam
+                        <input class="subheader" type="radio" name="algo-select" value="beamAlgo"> Top K
                     </label>
                 </div>
 
@@ -98,10 +82,6 @@ export function CalculatorPage(): Page {
                 <button id="btn-run-algo" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px;">
                     Run Calculation
                 </button>
-            </div>
-
-            <div class="calc-jobs" id="optimized-results-container" style="margin-top: 20px;">
-                <p>Select your settings and run the calculation.</p>
             </div>
         </div>
     </div>
