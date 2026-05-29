@@ -29,7 +29,7 @@ def restricted_scheduler(
         overlaps = False
 
         for excl_start, excl_end in excl_times:
-            if job.end > excl_start and job.start < excl_end:
+            if job.end > excl_start and job.start <= excl_end:
                 overlaps = True
                 break
         

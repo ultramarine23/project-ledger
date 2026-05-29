@@ -38,7 +38,7 @@
 }
 
 .large-paragraph {
-    display: block;
+    display: inline;
     font-size: 16px;
 }
 

@@ -32,16 +32,20 @@ export function CalculatorPage(): Page {
         
         <div id="calc-page_optimized">
             <div class="semiheader">Calculator Settings</div>
-            <div style="padding: 1rem; border-radius: 8px;">                
+            <div style="border-radius: 8px;">                
                 <div style="display: flex; gap: 15px;">
+                    <span class="large-paragraph"> Select calculation mode:<br></span>
                     <label style="cursor: pointer;">
-                        <input class="subheader" type="radio" name="algo-select" value="classicAlgo" checked> Quick Solve
+                        <input type="radio" name="algo-select" value="classicAlgo" checked> 
+                        <span class="large-paragraph"> Quick Solve </span>
                     </label>
                     <label style="cursor: pointer;">
-                        <input class="subheader" type="radio" name="algo-select" value="restrictAlgo"> Restrict
+                        <input type="radio" name="algo-select" value="restrictAlgo">
+                        <span class="large-paragraph"> Restricted Solve </span>
                     </label>
                     <label style="cursor: pointer;">
-                        <input class="subheader" type="radio" name="algo-select" value="beamAlgo"> Top K
+                        <input type="radio" name="algo-select" value="beamAlgo">
+                        <span class="large-paragraph"> Top K </span>
                     </label>
                 </div>
 
@@ -82,6 +86,10 @@ export function CalculatorPage(): Page {
                 <button id="btn-run-algo" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px;">
                     Run Calculation
                 </button>
+            </div>
+
+            <div class="calc-jobs" id="optimized-results-container" style="margin-top: 20px;">
+                <p class="color-muted">(Results will show here)</p>
             </div>
         </div>
     </div>
@@ -206,7 +214,7 @@ export function CalculatorPage(): Page {
             // ==========================================
             const runBtn = root.querySelector("#btn-run-algo") as HTMLButtonElement;
             const resultsContainer = root.querySelector("#optimized-results-container") as HTMLDivElement;
-            
+            console.log(resultsContainer);
             // This function runs when the user clicks "Run Calculation"
             runBtn?.addEventListener("click", async () => {
                 // Temporarily disable the button so the user doesn't spam click it
@@ -255,7 +263,7 @@ export function CalculatorPage(): Page {
                         // Attach the event listeners to the new cards inside the container
                         resultsPanel.attachEvents(resultsContainer);
                     } else if (optimizedSchedules) {
-                        
+
                     }
 
                 } catch (error) {
