@@ -215,6 +215,7 @@ export function CalculatorPage(): Page {
                 resultsContainer.innerHTML = "<p>Loading...</p>";
 
                 try {
+                    let optimizedSchedules;
                     let optimizedJobs; // This will hold the JobCollection returned by Python
 
                     // Check which algorithm is currently active in the state
@@ -232,7 +233,7 @@ export function CalculatorPage(): Page {
                         );
                         
                     } else if (appState.activeAlgo === "beamAlgo") {
-                        optimizedJobs = await SchedulerAPI.beamWAS(
+                        optimizedSchedules = await SchedulerAPI.beamWAS(
                             appState.allJobs,
                             appState.beamMaxSelections as number
                         );
@@ -253,6 +254,8 @@ export function CalculatorPage(): Page {
                         resultsContainer.innerHTML = resultsPanel.render();
                         // Attach the event listeners to the new cards inside the container
                         resultsPanel.attachEvents(resultsContainer);
+                    } else if (optimizedSchedules) {
+                        
                     }
 
                 } catch (error) {

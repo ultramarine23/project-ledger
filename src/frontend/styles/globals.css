@@ -111,9 +111,9 @@ body {
     position: sticky;
 
     top: 0;
-    left: var(--sidebar-width);
+    left: calc(var(--sidebar-width) + 5px);
 
-    width: calc(100vw - var(--sidebar-width));
+    width: calc(100vw - var(--sidebar-width) - 5px);
     height: 100vh;
 
     background: var(--bg-main);
